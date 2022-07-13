@@ -11,21 +11,18 @@ import java.util.ArrayList;
 public class AddPartitionReports extends JPanel {
     private JTabbedPane tabbedPanePartitions;
 
-    public AddPartitionReports(ActionListener listener, ArrayList<Partition> partitions){
+    public AddPartitionReports(ActionListener listener, ArrayList<Partition> partitions,
+                               ArrayList<Object[]> getReadyList,
+                               ArrayList<Object[]> getDispatchList,    ArrayList<Object[]> getExpirationTimeList,
+                               ArrayList<Object[]> getInExecutionList,    ArrayList<Object[]> getWakeUpList,
+                               ArrayList<Object[]> getBlockList, ArrayList<Object[]> getBlockedList,
+                               ArrayList<Object[]> getOutputList, ArrayList<Object[]> getNoReadyList, String name){
         setLayout(new BorderLayout());
         tabbedPanePartitions = new JTabbedPane();
         tabbedPanePartitions.setBackground(Color.WHITE);
-        for (int i = 0; i < partitions.size(); i++) {
-            tabbedPanePartitions.add(new AddListProcessPanel(listener, partitions.get(i).returnList(partitions.get(i).getReadyList()),
-                    partitions.get(i).returnList(partitions.get(i).getDispatchList()),
-                    partitions.get(i).returnList(partitions.get(i).getExpirationTimeList()),
-                    partitions.get(i).returnList(partitions.get(i).getInExecutionList()),
-                    partitions.get(i).returnList(partitions.get(i).getWakeUpList()),
-                    partitions.get(i).returnList(partitions.get(i).getBlockList()),
-                    partitions.get(i).returnList(partitions.get(i).getBlockedList()),
-                    partitions.get(i).returnList(partitions.get(i).getOutputList()),
-                    partitions.get(i).returnList(partitions.get(i).getNoReadyList())), partitions.get(i).getName());
-        }
+        tabbedPanePartitions.add(new AddListProcessPanel(listener, getReadyList, getDispatchList,
+                getExpirationTimeList, getInExecutionList, getWakeUpList, getBlockList,
+                getBlockedList, getOutputList, getNoReadyList), name);
         add(tabbedPanePartitions, BorderLayout.CENTER);
         add(addButtonExit(listener),  BorderLayout.SOUTH);
     }

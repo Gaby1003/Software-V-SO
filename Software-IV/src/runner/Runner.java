@@ -10,8 +10,8 @@ import model.Process;
 public class Runner {
 	
 	public static void main(String[] args) throws RepeatedProcess, RepeatedPartition {
-		//new Controller();
-		Manager m = new Manager();
+		new Controller();
+		/**Manager m = new Manager();
 
 		m.addNewProcess("P1", 20, 30, false);
 		m.addNewProcess("P2", 15, 25, true);
@@ -49,8 +49,7 @@ public class Runner {
 		System.out.println("-----------------Finalizados-----------------");
 		m.printList(m.getListByPartition("PAR2",m.getOutputList()));
 		System.out.println("-----------------No ejecutados-----------------");
-		m.printList(m.getListByPartition("PAR2",m.getNoReadyList()));
-
+		m.printList(m.getListByPartition("PAR2",m.getNoReadyList()));**/
 	}
 }
 

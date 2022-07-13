@@ -15,11 +15,11 @@ public class Constant {
     public static final Color COLOR_BLUE_2 = Color.decode("#9aedf9");
     public static final Color COLOR_PINK = Color.decode("#d9d7d8");
    
-    public static final Font FONT_NUNITO_TEXT = new Font("Nunito", Font.PLAIN, 20);
-    public static final Font FONT_NUNITO = new Font("Sarabun", Font.BOLD, 20);
-    public static final Font FONT_NUNITO_TABLE = new Font("Sarabun", Font.PLAIN, 15);
-    public static final Font FONT_NUNITO_2 = new Font("Sarabun", Font.BOLD, 25);
+    public static final Font FONT_NUNITO_TEXT = new Font("Nunito", Font.PLAIN, 23);
+    public static final Font FONT_NUNITO = new Font("Sarabun", Font.BOLD, 23);
+    public static final Font FONT_NUNITO_TABLE = new Font("Sarabun", Font.PLAIN, 16);
+    public static final Font FONT_NUNITO_2 = new Font("Sarabun", Font.BOLD, 27);
 
-    public static final String[] HEADER = {"Nombre", "Tiempo", "Tamaño", "Estado", "Partición"};
+    public static final String[] HEADER = {"Nombre", "Tiempo", "Tamaño", "Estado"};
     public static final String[] HEADER_PARTITIONS = {"Nombre","Tamaño"};
 }

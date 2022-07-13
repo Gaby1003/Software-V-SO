@@ -30,9 +30,6 @@ public class Controller implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (Events.valueOf(e.getActionCommand())) {
-            case INITIAL_PANEL_ACTIONS:
-                mainFrame.initAddProcessPanel(this);
-                break;
             case START_SIMULATION:
                 addPartitionTab();
                 break;
@@ -110,10 +107,28 @@ public class Controller implements ActionListener {
 
     private void addPartitionTab(){
         manager.makeTransition();
-        mainFrame.initSimulationPanel(this, manager.getPartitionList());
+        for (int i = 0; i < manager.getPartitionList().size(); i++) {
+            mainFrame.initSimulationPanel(this, manager.getPartitionList(),
+                    manager.returnList(manager.getListByPartition(manager.getPartitionList().get(i).getName(),
+                            manager.getReadyList())),
+                    manager.returnList(manager.getListByPartition(manager.getPartitionList().get(i).getName(),
+                            manager.getDispatchList())),
+                    manager.returnList(manager.getListByPartition(manager.getPartitionList().get(i).getName(),
+                            manager.getExpirationTimeList())),
+                    manager.returnList(manager.getListByPartition(manager.getPartitionList().get(i).getName(),
+                            manager.getInExecutionList())),
+                    manager.returnList(manager.getListByPartition(manager.getPartitionList().get(i).getName(),
+                            manager.getWakeUpList())),
+                    manager.returnList(manager.getListByPartition(manager.getPartitionList().get(i).getName(),
+                            manager.getBlockList())),
+                    manager.returnList(manager.getListByPartition(manager.getPartitionList().get(i).getName(),
+                            manager.getBlockedList())),
+                    manager.returnList(manager.getListByPartition(manager.getPartitionList().get(i).getName(),
+                            manager.getOutputList())),
+                    manager.returnList(manager.getListByPartition(manager.getPartitionList().get(i).getName(),
+                            manager.getNoReadyList())), manager.getPartitionList().get(i).getName());
+        }
     }
-
-
     public void addPartition(){
         try {
             String[] datas =  createPartition.getInfo();

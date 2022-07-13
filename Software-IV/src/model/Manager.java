@@ -234,6 +234,14 @@ public class Manager {
         return datas;
     }
 
+    public ArrayList<Object[]> returnList(ArrayList<Process> processes){
+        ArrayList<Object[]> listObject = new ArrayList<>();
+        for (Process process: processes) {
+            listObject.add(process.toObjectVector());
+        }
+        return listObject;
+    }
+
     public ArrayList<Partition> getPartitionList() {
         return partitionList;
     }
