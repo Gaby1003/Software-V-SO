@@ -42,8 +42,6 @@ public class AddListProcessPanel extends JPanel{
 		add(tabbedPane);
     }
 
-
-
     public void createScroll(JPanel panel, String name) {
 		JScrollPane scroll = new JScrollPane(); 
 		scroll.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED ); 

@@ -16,6 +16,7 @@ public class Partition {
     private ArrayList<Process> blockedList; //Bloqueado
     private ArrayList<Process> outputList; //Salida
     private ArrayList<Process> noReadyList; //Salida
+    private int time;
 
 
     public Partition(String name, long partitionSize) {
@@ -31,6 +32,7 @@ public class Partition {
         blockList = new ArrayList<Process>();
         outputList = new ArrayList<Process>();
         noReadyList = new ArrayList<Process>();
+        time = 0;
     }
 
     public ArrayList<Object[]> returnList(ArrayList<Process> processes){
@@ -129,6 +131,13 @@ public class Partition {
         this.noReadyList = noReadyList;
     }
 
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
 
     public Object[] toObjectVector() {
         return new Object[] {name, partitionSize};

@@ -106,8 +106,11 @@ public class Controller implements ActionListener {
     }
 
     private void addPartitionTab(){
+
         manager.makeTransition();
+        mainFrame.cleanPanel();
         for (int i = 0; i < manager.getPartitionList().size(); i++) {
+            System.out.println("Dentro");
             mainFrame.initSimulationPanel(this, manager.getPartitionList(),
                     manager.returnList(manager.getListByPartition(manager.getPartitionList().get(i).getName(),
                             manager.getReadyList())),
@@ -128,6 +131,8 @@ public class Controller implements ActionListener {
                     manager.returnList(manager.getListByPartition(manager.getPartitionList().get(i).getName(),
                             manager.getNoReadyList())), manager.getPartitionList().get(i).getName());
         }
+        mainFrame.addGeneralTab(manager.returnList(manager.getNoReadyList()), "No ejecutados",
+                "no ejecutados por exceso de tamaño");
     }
     public void addPartition(){
         try {

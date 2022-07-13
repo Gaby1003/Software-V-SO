@@ -64,13 +64,22 @@ public class MainFrame extends JFrame {
         mainPanel.updateUI();
         repaint();
     }
+
+    public void cleanPanel(){
+        mainPanel.removeAll();
+        addPartitionReports = new AddPartitionReports();
+    }
+
+    public void addGeneralTab(ArrayList<Object[]> datas, String name, String description){
+        addPartitionReports.addGeneralTab(datas, name, description );
+    }
+
     public void initSimulationPanel(ActionListener listener, ArrayList<Partition> partitions,
                                     ArrayList<Object[]> getReadyList,
                                     ArrayList<Object[]> getDispatchList,    ArrayList<Object[]> getExpirationTimeList,
                                     ArrayList<Object[]> getInExecutionList,    ArrayList<Object[]> getWakeUpList,
                                     ArrayList<Object[]> getBlockList, ArrayList<Object[]> getBlockedList,
                                     ArrayList<Object[]> getOutputList, ArrayList<Object[]> getNoReadyList, String name) {
-        //mainPanel.removeAll();
         addPartitionReports.addTab(listener, partitions, getReadyList, getDispatchList,
                 getExpirationTimeList, getInExecutionList, getWakeUpList, getBlockList,getBlockedList,
                  getOutputList,  getNoReadyList,name);

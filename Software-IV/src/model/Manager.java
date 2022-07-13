@@ -4,6 +4,7 @@ import exception.RepeatedPartition;
 import exception.RepeatedProcess;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Manager {
 
@@ -18,14 +19,14 @@ public class Manager {
     private ArrayList<Process> blockedList; //Bloqueado
     private ArrayList<Process> outputList; //Salida
     private ArrayList<Process> noReadyList; //Salida
-    private ArrayList<Process> initList;
+    private ArrayList<Process> timeList; //Listos
 
     public Manager() {
         initLists();
     }
 
     public void initLists() {
-        initList = new ArrayList<Process>();
+        timeList = new ArrayList<Process>();
         this.partitionList = new ArrayList<Partition>();
         readyList = new ArrayList<Process>();
         dispatchList = new ArrayList<Process>();
@@ -49,6 +50,7 @@ public class Manager {
     public void addNewProcess(String name, long time, long size, boolean blocked) throws RepeatedProcess {
         if (validateNameProcess(name)) {
             readyList.add(new Process(name, time, size, blocked, null));
+            timeList.add(new Process(name, time, size, blocked, null));
         } else {
             throw new RepeatedProcess();
         }
@@ -162,12 +164,10 @@ public class Manager {
     public void makeTransition() {
         int partitionPosition = 0;
         int count = 0;
-        System.out.println(readyList.size());
         for (int i = 0; i < readyList.size(); i++) {
             Process process = new Process(readyList.get(i).getName(),
                     readyList.get(i).getTime(), readyList.get(i).getSize(),
                     readyList.get(i).isBlocked(), null);
-            System.out.println("AAAA");
             int[] datas = validateProcess(process, partitionPosition, i, count);
             partitionPosition = datas[0];
             if(datas[1] >= 0 && validateNameNoProcess(process.getName())){
@@ -175,7 +175,6 @@ public class Manager {
                 validateProcessTransition(process, i);
             }
             count = 0;
-            System.out.println(i);
         }
     }
 
@@ -224,6 +223,41 @@ public class Manager {
             System.out.println(list.get(i).getName() + " - "  + " - Time: "
                     + list.get(i).getTime() + " - " + list.get(i).getNamePartition());
         }
+    }
+
+    public void calculateTotalTime(){
+        int quantity=0;
+        for (int i = 0; i < partitionList.size(); i++) {
+            for (int j = 0; j < timeList.size(); j++){
+                if (timeList.get(j).getNamePartition().equals(partitionList.get(i).getName())
+                        && timeList.get(j).getNamePartition() != null) {
+                    quantity += timeList.get(i).getTime();
+                }
+            }
+            partitionList.get(i).setTime(quantity);
+        }
+    }
+
+    public ArrayList<Object[]> getTimeList(){
+        ArrayList<Object[]> datas = new ArrayList<Object[]>();
+        Collections.sort(partitionList, new ProcessComparator());
+        datas.addAll(getPartitionNameList());
+        return datas;
+    }
+
+    public ArrayList<Object[]> getProcessList(){
+        ArrayList<Object[]> datas = new ArrayList<Object[]>();
+        Collections.sort(outputList, new ProcessTImeComparator());
+        datas.addAll(getProcessNameList());
+        return datas;
+    }
+
+    public ArrayList<Object[]> getProcessNameList(){
+        ArrayList<Object[]> datas = new ArrayList<Object[]>();
+        for (int i = 0; i < outputList.size(); i++) {
+            datas.add(outputList.get(i).toObjectVector());
+        }
+        return datas;
     }
 
     public ArrayList<Object[]> getPartitionNameList() {

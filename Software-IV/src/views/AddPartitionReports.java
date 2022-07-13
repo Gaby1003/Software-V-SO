@@ -4,14 +4,21 @@ import controller.Events;
 import model.Partition;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class AddPartitionReports extends JPanel {
     private JTabbedPane tabbedPanePartitions;
+    private JTable jtElement;
+    private JScrollPane scroll;
+    private JTabbedPane tabbedPane;
 
     public AddPartitionReports() {
+        tabbedPanePartitions = new JTabbedPane();
+        tabbedPanePartitions.setBackground(Color.WHITE);
         setLayout(new BorderLayout());
     }
 
@@ -21,15 +28,41 @@ public class AddPartitionReports extends JPanel {
                        ArrayList<Object[]> getInExecutionList, ArrayList<Object[]> getWakeUpList,
                        ArrayList<Object[]> getBlockList, ArrayList<Object[]> getBlockedList,
                        ArrayList<Object[]> getOutputList, ArrayList<Object[]> getNoReadyList, String name) {
-
-        tabbedPanePartitions = new JTabbedPane();
-        tabbedPanePartitions.setBackground(Color.WHITE);
         tabbedPanePartitions.add(new AddListProcessPanel(listener, getReadyList, getDispatchList,
                 getExpirationTimeList, getInExecutionList, getWakeUpList, getBlockList,
                 getBlockedList, getOutputList, getNoReadyList), name);
         add(tabbedPanePartitions, BorderLayout.CENTER);
         add(addButtonExit(listener), BorderLayout.SOUTH);
+    }
 
+    public void addGeneralTab(ArrayList<Object[]> datas, String name, String description){
+        tabbedPanePartitions.add(dataTable("Lista de " + description, datas), name);
+    }
+
+    public JPanel dataTable(String title, ArrayList<Object[]> list){
+        JPanel panel = new JPanel();
+
+        DefaultTableModel element = new DefaultTableModel();
+
+        JLabel nameProcess = new JLabel(title);
+        nameProcess.setBorder(new EmptyBorder(0, 40, 0, 40));
+        panel.setBackground(Color.WHITE);
+        panel.add(nameProcess);
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        element = new DefaultTableModel();
+        element.setColumnIdentifiers(Constant.HEADER);
+        jtElement = new JTable();
+        jtElement.setModel(element);
+        jtElement.setFont(Constant.FONT_NUNITO_TABLE);
+        jtElement.getTableHeader().setFont(Constant.FONT_NUNITO_TABLE);
+        jtElement.getTableHeader().setBackground(Constant.COLOR_BLUE_2);
+        scroll = new JScrollPane(jtElement);
+        scroll.getViewport().setBackground(Color.WHITE);
+        panel.add(scroll, BorderLayout.PAGE_END);
+        addRows(list, element);
+
+        return panel;
     }
 
     public JPanel addButtonExit(ActionListener listener) {
@@ -49,5 +82,12 @@ public class AddPartitionReports extends JPanel {
         panel.add(newTransition);
         panel.add(exit);
         return panel;
+    }
+
+    public void addRows(ArrayList<Object[]> list, DefaultTableModel element) {
+        for(Object[] data : list) {
+            data[3] = (data[3].equals(true)) ? "Bloqueado" : "Sin bloqueo";
+            element.addRow(data);
+        }
     }
 }
