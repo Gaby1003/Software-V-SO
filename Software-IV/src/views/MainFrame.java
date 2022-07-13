@@ -42,6 +42,7 @@ public class MainFrame extends JFrame {
         mainPanel = new JPanel();
         initAddProcessPanel(listener);
         add(mainPanel);
+        addPartitionReports = new AddPartitionReports();
     }
 
     public void initAddProcessPanel(ActionListener listener) {
@@ -69,8 +70,8 @@ public class MainFrame extends JFrame {
                                     ArrayList<Object[]> getInExecutionList,    ArrayList<Object[]> getWakeUpList,
                                     ArrayList<Object[]> getBlockList, ArrayList<Object[]> getBlockedList,
                                     ArrayList<Object[]> getOutputList, ArrayList<Object[]> getNoReadyList, String name) {
-        mainPanel.removeAll();
-        addPartitionReports = new AddPartitionReports(listener, partitions, getReadyList, getDispatchList,
+        //mainPanel.removeAll();
+        addPartitionReports.addTab(listener, partitions, getReadyList, getDispatchList,
                 getExpirationTimeList, getInExecutionList, getWakeUpList, getBlockList,getBlockedList,
                  getOutputList,  getNoReadyList,name);
         mainPanel.add(addPartitionReports, BorderLayout.CENTER);

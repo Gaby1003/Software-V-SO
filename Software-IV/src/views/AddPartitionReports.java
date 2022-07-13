@@ -11,20 +11,25 @@ import java.util.ArrayList;
 public class AddPartitionReports extends JPanel {
     private JTabbedPane tabbedPanePartitions;
 
-    public AddPartitionReports(ActionListener listener, ArrayList<Partition> partitions,
-                               ArrayList<Object[]> getReadyList,
-                               ArrayList<Object[]> getDispatchList,    ArrayList<Object[]> getExpirationTimeList,
-                               ArrayList<Object[]> getInExecutionList,    ArrayList<Object[]> getWakeUpList,
-                               ArrayList<Object[]> getBlockList, ArrayList<Object[]> getBlockedList,
-                               ArrayList<Object[]> getOutputList, ArrayList<Object[]> getNoReadyList, String name){
+    public AddPartitionReports() {
         setLayout(new BorderLayout());
+    }
+
+    public void addTab(ActionListener listener, ArrayList<Partition> partitions,
+                       ArrayList<Object[]> getReadyList,
+                       ArrayList<Object[]> getDispatchList, ArrayList<Object[]> getExpirationTimeList,
+                       ArrayList<Object[]> getInExecutionList, ArrayList<Object[]> getWakeUpList,
+                       ArrayList<Object[]> getBlockList, ArrayList<Object[]> getBlockedList,
+                       ArrayList<Object[]> getOutputList, ArrayList<Object[]> getNoReadyList, String name) {
+
         tabbedPanePartitions = new JTabbedPane();
         tabbedPanePartitions.setBackground(Color.WHITE);
         tabbedPanePartitions.add(new AddListProcessPanel(listener, getReadyList, getDispatchList,
                 getExpirationTimeList, getInExecutionList, getWakeUpList, getBlockList,
                 getBlockedList, getOutputList, getNoReadyList), name);
         add(tabbedPanePartitions, BorderLayout.CENTER);
-        add(addButtonExit(listener),  BorderLayout.SOUTH);
+        add(addButtonExit(listener), BorderLayout.SOUTH);
+
     }
 
     public JPanel addButtonExit(ActionListener listener) {
@@ -45,7 +50,4 @@ public class AddPartitionReports extends JPanel {
         panel.add(exit);
         return panel;
     }
-
-
-
 }

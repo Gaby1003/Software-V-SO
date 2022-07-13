@@ -77,13 +77,13 @@ public class CreateProcess extends JDialog {
 		newBlocProcess.addItem("Si");
 		UIManager.put("ComboBox.background",new javax.swing.plaf.ColorUIResource(Color.WHITE));
 
-		JLabel partitionLb = new JLabel("Partición");
+		/**JLabel partitionLb = new JLabel("Partición");
 		partitionLb.setFont(Constant.FONT_NUNITO_TEXT);
 		partitionLb.setBorder(new EmptyBorder(0, 5, 0, 5));
 		partition = new JComboBox<String>();
 		for (Object[] objects : datas) {
 			partition.addItem(objects[0]);
-		}
+		}**/
 		UIManager.put("ComboBox.background",new javax.swing.plaf.ColorUIResource(Color.WHITE));
 
 		panel.add(nameProcess);
@@ -94,8 +94,8 @@ public class CreateProcess extends JDialog {
 		panel.add(size);
 		panel.add(newBlockProcess);
 		panel.add(newBlocProcess);
-		panel.add(partitionLb);
-		panel.add(partition);
+		//panel.add(partitionLb);
+		//panel.add(partition);
 
 		mainPanel.add(panel);
 		mainPanel.add(addButtonNewProcess(listener));
@@ -129,7 +129,7 @@ public class CreateProcess extends JDialog {
 
 	public String[] getInfo() throws EmptyTextFieldException, PossitiveValues, TimeInNumber {
 		return new String[] {getNameProcess(), getTimeProcess(), getSizeData(),
-			newBlocProcess.getSelectedItem().toString(), partition.getSelectedItem().toString()};
+			newBlocProcess.getSelectedItem().toString()};
 	}
 
 	public String getNameProcess() throws EmptyTextFieldException {
