@@ -247,7 +247,7 @@ public class Manager {
 
     public ArrayList<Object[]> getProcessList(){
         ArrayList<Object[]> datas = new ArrayList<Object[]>();
-        Collections.sort(outputList, new ProcessTImeComparator());
+        //Collections.sort(outputList, new ProcessTImeComparator());
         datas.addAll(getProcessNameList());
         return datas;
     }
