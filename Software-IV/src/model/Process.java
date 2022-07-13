@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class Process {
 	
 	private String name;
-	private int time;
+	private long time;
 	private boolean isBlocked;
-	private int size;
+	private long size;
 	private String namePartition;
 	
-	public Process(String name, int time,int size, boolean isBlocked, String namePartition) {
+	public Process(String name, long time,long size, boolean isBlocked, String namePartition) {
 		super();
 		this.name = name;
 		this.time = time;
@@ -27,19 +27,19 @@ public class Process {
 		this.name = name;
 	}
 
-	public int getTime() {
+	public long getTime() {
 		return time;
 	}
 
-	public void setTime(int time) {
+	public void setTime(long time) {
 		this.time = time;
 	}
 
-	public int getSize() {
+	public long getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(long size) {
 		this.size = size;
 	}
 

@@ -5,9 +5,8 @@ import exception.RepeatedProcess;
 import java.util.ArrayList;
 
 public class Partition {
-    private static final int EXECUTION_TIME = 5;
     private String name;
-    private int partitionSize;
+    private long partitionSize;
     private ArrayList<Process> readyList; //Listos
     private ArrayList<Process> dispatchList; //Despachar
     private ArrayList<Process> expirationTimeList; //Expiraci�n de tiempo
@@ -18,14 +17,11 @@ public class Partition {
     private ArrayList<Process> outputList; //Salida
     private ArrayList<Process> noReadyList; //Salida
 
-    public Partition(String name, int partitionSize) {
+
+    public Partition(String name, long partitionSize) {
         super();
         this.name = name;
         this.partitionSize = partitionSize;
-        initLists();
-    }
-
-    public void initLists() {
         readyList = new ArrayList<Process>();
         dispatchList = new ArrayList<Process>();
         expirationTimeList = new ArrayList<Process>();
@@ -37,33 +33,6 @@ public class Partition {
         noReadyList = new ArrayList<Process>();
     }
 
-    public void validateProcess(Process process, int i) {
-        process.setTime(process.getTime() - EXECUTION_TIME < 0 ?
-                0 : process.getTime() - EXECUTION_TIME);
-        dispatchList.add(readyList.get(i));
-        inExecutionList.add(process);
-        isExpirationTime(process);
-    }
-
-    private void isExpirationTime(Process process) {
-        if(process.getTime() > 0) {
-            isBlocked(process);
-            readyList.add(process);
-        }else {
-            outputList.add(process);
-        }
-    }
-
-    private void isBlocked(Process process) {
-        if(process.isBlocked()) {
-            blockList.add(process);
-            blockedList.add(process);
-            wakeUpList.add(process);
-        }else {
-            expirationTimeList.add(process);
-        }
-    }
-
     public ArrayList<Object[]> returnList(ArrayList<Process> processes){
         ArrayList<Object[]> listObject = new ArrayList<>();
         for (Process process: processes) {
@@ -72,20 +41,20 @@ public class Partition {
         return listObject;
     }
 
-    public void setTimeByName(String name, int time) {
-        for (int i = 0; i < readyList.size(); i++) {
-            if(readyList.get(i).getName().equals(name)) {
-                readyList.get(i).setTime(time);
-            }
-        }
+    public String getName() {
+        return name;
     }
 
-    public void setStateByName(String name, boolean state) {
-        for (int i = 0; i < readyList.size(); i++) {
-            if(readyList.get(i).getName().equals(name)) {
-                readyList.get(i).setBlocked(state);
-            }
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getSize() {
+        return partitionSize;
+    }
+
+    public void setSize(long size) {
+        this.partitionSize = partitionSize;
     }
 
     public ArrayList<Process> getReadyList() {
@@ -158,22 +127,6 @@ public class Partition {
 
     public void setNoReadyList(ArrayList<Process> noReadyList) {
         this.noReadyList = noReadyList;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getSize() {
-        return partitionSize;
-    }
-
-    public void setSize(int size) {
-        this.partitionSize = partitionSize;
     }
 
 

@@ -75,12 +75,6 @@ public class Controller implements ActionListener {
             case DELETE_PROCESS:
                 showDeleteProcess();
                 break;
-            case EXIT_DIALOG_DELETE:
-                editProcess.dispose();
-                break;
-            case ENTER_DELETE:
-                editProcess();
-                break;
         }
     }
 
@@ -105,8 +99,8 @@ public class Controller implements ActionListener {
     private void addProcess() {
         try {
             String[] datas =  createProcess.getInfo();
-            manager.addNewProcess(datas[0], Integer.parseInt(datas[1]),
-                    Integer.parseInt(datas[2]), datas[3].equals("Si") ? true : false, datas[4]);
+            manager.addNewProcess(datas[0], Long.parseLong(datas[1]),
+                    Long.parseLong(datas[2]), datas[3].equals("Si") ? true : false);
             createProcess.dispose();
             mainFrame.addRowToTable(datas);
         } catch (RepeatedProcess | EmptyTextFieldException | PossitiveValues | TimeInNumber e) {
@@ -123,7 +117,7 @@ public class Controller implements ActionListener {
     public void addPartition(){
         try {
             String[] datas =  createPartition.getInfo();
-            manager.addNewPartition(datas[0], Integer.parseInt(datas[1]));
+            manager.addNewPartition(datas[0], Long.parseLong(datas[1]));
             createPartition.dispose();
             mainFrame.addRowToTablePartitions(datas);
         } catch (RepeatedPartition | EmptyTextFieldException | PossitiveValues | TimeInNumber e) {
@@ -141,7 +135,7 @@ public class Controller implements ActionListener {
 
 
     private void newTransition() {
-        //manager.initLists();
+        manager.initLists();
         mainFrame.initAddProcessPanel(this);
     }
 
